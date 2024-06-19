@@ -27,7 +27,7 @@ public class Order {
         Random random = new Random();
         this.number = random.nextInt(1000, 9999);
         this.status = status;
-        if (table.getCovers() <= covers) {
+        if (table.getCovers() < covers) {
             throw new RuntimeException("The number of covers is higher than the table's max seats number.");
         }
         this.covers = covers;
@@ -60,7 +60,7 @@ public class Order {
 
     public void printOrder() {
         System.out.println("Order {" +
-                "\nnumber = " + number +
+                System.lineSeparator() + "number = " + number +
                 ", status = " + status +
                 ", covers = " + covers +
                 ", time = " + time +
