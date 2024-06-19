@@ -53,19 +53,13 @@ class ApplicationTests {
     }
 
     @ParameterizedTest
-    @CsvSource({"8", "10", "9.5", "11"})
-    void testPrices(double price) {
-        System.out.println("testing prices...");
-        Pizza pizza = new Pizza("TestPizza", price, 700);
+    @CsvSource({"Test1, 8, 700", "Test2, 10, 900", "Test3, 12, 1200"})
+    void testPricesAndCalories(String name, double price, int calories) {
+        System.out.println("testing name, prices and calories...");
+        Pizza pizza = new Pizza(name, price, calories);
+        assertEquals(name, pizza.getName());
         assertEquals(price, pizza.getPrice());
-    }
-
-    @ParameterizedTest
-    @CsvSource({"150", "120", "0"})
-    void testCalories(int calories) {
-        System.out.println("testing calories...");
-        Drink drink = new Drink("TestDrink", 2, calories);
-        assertEquals(calories, drink.getCalories());
+        assertEquals(calories, pizza.getCalories());
     }
 
     @Test
