@@ -8,9 +8,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class ApplicationTests {
@@ -67,7 +69,21 @@ class ApplicationTests {
     }
 
     @Test
-    void testMenuPrinting() {
-        Menu menu = 
+    void testMenuPrinting(@Autowired ApplicationContext context) {
+        System.out.println("testing printMenu...");
+        Menu menu = context.getBean(Menu.class);
+        assertNotNull(menu);
+
+        List<Pizza> pizzas = menu.getPizzas();
+        assertNotNull(pizzas);
+        assertFalse(pizzas.isEmpty());
+
+        List<Drink> drinks = menu.getDrinks();
+        assertNotNull(drinks);
+        assertFalse(drinks.isEmpty());
+
+        List<Topping> toppings = menu.getToppings();
+        assertNotNull(toppings);
+        assertFalse(toppings.isEmpty());
     }
 }
